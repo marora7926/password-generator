@@ -17,69 +17,69 @@ console.log(newPwd)
 var curPwd = {
   pwd0: "",
   length: 0,
-  lowerCh0: true,
-  upperCh0: true,
-  numericCh0: true,
-  specialCh0: true,
+  lowerCh0: false,
+  upperCh0: false,
+  numericCh0: false,
+  specialCh0: false,
+}
+//verify the above steps - self-check #2
+console.log(curPwd)
+
+// Create new password by prompting (window.prompt command) or confirming (window.confirm command) different aspects of the new password.
+var createPwd:{
+  function() {
+    curPwd.length = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
+    if (curPwd.length <8 || curPwd.length >128){
+    return false;
+    }
+    else {
+    return true;
+    } 
+  }
+
+  function() {
+    curPwd.lowerCh0 = window.confirm("Do you wish to have lowercase character/s in your password");
+  } 
+  
+  function() {
+    curPwd.upperCh0 = window.confirm("Do you wish to have uppercase character/s in your password");
+  }
+  
+  function() {
+    curPwd.numericCh0 = window.confirm("Do you wish to have number character/s in your password");
+  }
+
+  function() {
+    curPwd.specialCh0 = window.confirm("Do you wish to have special character/s in your password");
+  }
+};
+
+
+
+//Prompt to choose ("prompt" command) the length for a password between 8 and 128 characters inclusive.
+passwordLength: function() {
+  this.length = prompt ("Your password length should be between 8 and 128 charaters inclusive");
 }
 
-// // Prompt and verification to choose ("prompt" command) the length for a password between 8 and 128 characters inclusive.
-// passwordLength: function() {
-//   this.length = window.prompt("write a number between 8 and 128 charaters inclusive for your password length");
-//   if (this.length <8 || this.length>128){
-//     return false;
-//     }
-//   else {
-//     return true;
-//     } 
-// }
+//Prompt to choose ("confirm" command) lowercase charater/s for a password.
+passwordLower: function(){
+  this.lower = confirm ("Do you wish to have lowercase character/s in your password"); 
+}
 
+//Prompt to choose ("confirm" command) uppercase charater/s for a password.
+passwordUpper: function(){
+  this.upper = confirm ("Do you wish to have uppercase character/s in your password"); 
+}
 
-// //Prompt to choose ("confirm" command) lowercase charater/s for a password.
-// passwordLower: function(){
-//   this.lower = confirm ("Do you wish to have lowercase character/s in your password"); 
-// }
+//Prompt to choose ("confirm" command) numeric charater/s for a password.
+passwordNumber: function(){
+  this.number = confirm ("Do you wish to have muneric character/s in your password"); 
+}
 
-// //Prompt to choose ("confirm" command) uppercase charater/s for a password.
-// passwordUpper: function(){
-//   this.upper = confirm ("Do you wish to have uppercase character/s in your password"); 
-// }
-
-// //Prompt to choose ("confirm" command) numeric charater/s for a password.
-// passwordNumber: function(){
-//   this.number = confirm ("Do you wish to have muneric character/s in your password"); 
-// }
-
-// //Prompt to choose ("confirm" command) special charater/s for a password.
-// passwordSpecial: function(){
-//   this.special = confirm ("Do you wish to have special character/s in your password"); 
-// }
-
-
-// //Prompt to choose ("prompt" command) the length for a password between 8 and 128 characters inclusive.
-// passwordLength: function() {
-//   this.length = prompt ("Your password length should be between 8 and 128 charaters inclusive");
-// }
-
-// //Prompt to choose ("confirm" command) lowercase charater/s for a password.
-// passwordLower: function(){
-//   this.lower = confirm ("Do you wish to have lowercase character/s in your password"); 
-// }
-
-// //Prompt to choose ("confirm" command) uppercase charater/s for a password.
-// passwordUpper: function(){
-//   this.upper = confirm ("Do you wish to have uppercase character/s in your password"); 
-// }
-
-// //Prompt to choose ("confirm" command) numeric charater/s for a password.
-// passwordNumber: function(){
-//   this.number = confirm ("Do you wish to have muneric character/s in your password"); 
-// }
-
-// //Prompt to choose ("confirm" command) special charater/s for a password.
-// passwordSpecial: function(){
-//   this.special = confirm ("Do you wish to have special character/s in your password"); 
-// }
+//Prompt to choose ("confirm" command) special charater/s for a password.
+passwordSpecial: function(){
+  this.special = confirm ("Do you wish to have special character/s in your password"); 
+}
 
 
 
