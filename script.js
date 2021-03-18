@@ -5,8 +5,8 @@ var generateBtn = document.querySelector("#generate");
 var pwdRule1 = {
   pwd1: "", //blank field
   length1: 0, //length when 0
-  lowerCh1: false, // no lowercase charater
-  upperCh1: false, //no uppercase character
+  lowerCase1: false, // no lowercase charater
+  upperCase1: false, //no uppercase character
   numericCh1: false, //no number charater
   specialCh1: false, // no special charater
   includeACh1: false, //does not include a charater from each of the above four
@@ -16,8 +16,8 @@ console.log(pwdRule1)
 
 // Defining password rules (#2); defining the arrays to be include in the new password
 var pwdRule2 = {
-  lowerCh2: ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
-  upperCh2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+  lowerCase2: ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+  upperCase2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
   numericCh2: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
   specialCh2: ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'], //special charaters from OWASP website
 
@@ -40,15 +40,19 @@ var pwdRule3 = {
 
     lowerCh3: function() {
         pwdRule1.lowerCh1 = window.confirm("Do you wish to have lowercase character/s in your password");
-        if (pwdRule1.lowerCh1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.lowerCh2) //this will add a value to a blank field.
+        if (pwdRule1.lowerCase1 === true){
+            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.lowerCase2) //this will add a value to a blank field.
+            pwdRule1.includeACh1 === true;
+
+        
         }
     },
   
     upperCh3: function () {
-        pwdRule1.upperCh1 = window.confirm("Do you wish to have uppercase character/s in your password");
-        if (pwdRule1.upperCh1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.upperCh2) //this will add a value to a blank field.
+        pwdRule1.upperCase1 = window.confirm("Do you wish to have uppercase character/s in your password");
+        if (pwdRule1.upperCase1 === true){
+            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.upperCase2) //this will add a value to a blank field.
+            pwdRule1.includeACh1 === true;
         }
     },
   
@@ -56,6 +60,7 @@ var pwdRule3 = {
         pwdRule1.numericCh1 = window.confirm("Do you wish to have number character/s in your password");
         if (pwdRule1.numeric1 === true){
             pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.numbericCh2) //this will add a value to a blank field.
+            pwdRule1.includeACh1 === true;
         }
     },
 
@@ -63,9 +68,62 @@ var pwdRule3 = {
         pwdRule1.specialCh1 = window.confirm("Do you wish to have special character/s in your password");
         if (pwdRule1.specialCh1 === true){
             pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.specialCh2) //this will add a value to a blank field.
+            pwdRule1.includeACh1 === true;
         }
     },
 }
+
+
+// Defining password rules (#4); validating the password
+pwdRule4: function{
+    var lowerCase4 = false;
+    if (pwdRule4.lowerCase4) {
+        for (var i = 0; i < length; i++) {
+            if (pwdRule2.lowerCase2.includes(pwdRule1.pwd1[i])) {
+                lowerCase4 = true;
+                break;
+            }
+        }
+    }
+
+    var upperCase4 = false;
+    if (pwdRule4.upperCase4) {
+        for (var i = 0; i < length; i++) {
+            if (pwdRule2.upperCase2.includes(pwdRule1.pwd1[i])) {
+                upperCase4 = true;
+                break;
+            }
+        }
+    }
+
+    var numericCh4 = false;
+    if (pwdRule4.numericCh4) {
+        for (var i = 0; i < length; i++) {
+            if (pwdRule2.numericCh2.includes(pwdRule1.pwd1[i])) {
+                numericCh4 = true;
+                break;
+            }
+        }
+    }
+    
+    var specialCh4 = false;
+    if (pwdRule4.specialCh4) {
+        for (var i = 0; i < length; i++) {
+            if (pwdRule2.specialCh2.includes(pwdRule1.pwd1[i])) {
+                specialCh4 = true;
+                break;
+            }
+        }
+    }
+}
+
+
+// Defining password rules (#5); reseting the password
+var pwdRule5 = {
+
+}
+
+
 
 // Generate password function
 function generatePassword() {
