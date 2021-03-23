@@ -1,157 +1,176 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Password rules
-var masterPwd = {
-    pwd1: "", //blank field
-    length1: 0, //length when 0
-    lowerCase1: false, // no lowercase charater
-    upperCase1: false, //no uppercase character
-    numericCh1: false, //no number charater
-    specialCh1: false, // no special charater
-    includeACh1: false, //does not include a charater from each of the above four
+// variables in global scope
+var pwd = "";
+var length = 0;
+var lowerCase = false;
+var upperCase = false;
+var numericCh = false;
+var specialCh = false;
+var includeACh = false;
 
-    //defining the arrays to be include in the new password
-    lowerCase2: ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
-    upperCase2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-    numericCh2: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-    specialCh2: ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'], //special charaters from OWASP website
-    chArray2: [],
+//defining the arrays to be included in the new password
+var lowerCaseArray = ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var upperCaseArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var numericChArray = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var specialChArray = ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'];
+var anyCharacterArray = [""];
 
-    // PROMPTS and CONFIRM message
-    // prompting user to add a number for the desired length of their password
-    lengthPrompt: function(){
-        masterPwd.length1 = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length"
-        );
-        if (this.validlength() === false) {
-            alert("your password must have between 8 and 128 inclusive charaters");
-            masterPwd.lengthPrompt();
-        }
-    },    
-        
-    // Defining password rules (#3); prompting/confirming the rules to be included and validating the user input
-    validlength: function () {
-        if (pwdRule1.length1 <8 || pwdRule1.length >128){
+// variable if a charater is included
+var includedLowerCase = false;
+var includedUpperCase = false;
+var includedNumericCh = false;
+var includedSpecialCh = false;
+var validPwd = false;
+
+// PROMPTS and CONFIRM functions
+// validating the length of the password
+function validLength() {
+    if (this.length < 8 || this.length > 128){
         return false;
-        }
-        else {
+    } 
+    else {
         return true;
-        } 
-    },
+    } 
+};
+
+// prompting user to add a number for the desired length of their password
+function lengthPrompt() {
+    this.length = prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
+    if (validlength() === false) {
+        alert("your password must have between 8 and 128 charaters");
+        this.lengthPrompt();
+    }
+};
+
+// prompting user confirming for including a lower case in their password
+function lowerCasePrompt() {
+    this.lowerCase = confirm("Do you wish to have lowercase character/s in your password");
+    if (this.lowerCase === true){
+        this.anyCharacterArray = this.anyCharacterArray.concat(lowerCaseArray);
+        this.includeACh === true;
+    }
+};
+
+// prompting user confirming for including a upper case in their password
+function upperCasePrompt () {
+    this.upperCase = confirm("Do you wish to have uppercase character/s in your password");
+    if (this.upperCase === true){
+        this.anyCharacterArray = this.anyCharacterArray.concat(upperCaseArray); //this will add a uppercase character/s to a blank field.
+        this.includeACh=== true;
+    }
+};
+
+// prompting user confirming for including a number in their password
+function numericChPrompt() {
+    this.numericCh = confirm("Do you wish to have number character/s in your password");
+    if (this.numericCh === true){
+        this.anyCharacterArray = this.anyCharacterArray.concat(this.numericChArray); //this will add a number character/s to a blank field.
+        this.includeACh === true;
+    }
+};
+
+// // prompting user confirming for including a special charater in their password
+function specialChPrompt() {
+    this.specialCh = confirm("Do you wish to have special character/s in your password");
+    if (this.specialCh === true) {
+        this.anyCharacterArray = this.anyCharacterArray.concat(specialChArray); //this will add a special character/s to a blank field.
+        this.includeACh === true;
+    }
+};
     
-    lowerCasePrompt: function() {
-        pwdRule1.lowerCase1 = window.confirm("Do you wish to have lowercase character/s in your password");
-        if (masterPwd.lowerCase1 === true){
-            masterPwd.chArray2 = masterPwd.chArray2.concat(masterPwd.lowerCase2) //this will add a lowercase charater to a blank field.
-            masterPwd.includeACh1 === true;        
-        }
-    },
-  
-    upperCasePrompt: function () {
-        masterPwd.upperCase1 = window.confirm("Do you wish to have uppercase character/s in your password");
-        if (masterPwd.upperCase1 === true){
-            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.upperCase2) //this will add a uppercase charater to a blank field.
-            masterPwd.includeACh1 === true;
-        }
-    },
-  
-    numberChPrompt: function() {
-        masterPwd.numericCh1 = window.confirm("Do you wish to have number character/s in your password");
-        if (masterPwd.numericCh1 === true){
-            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.numbericCh2) //this will add a number charater to a blank field.
-            masterPwd.includeACh1 === true;
-        }
-    },
-
-    specialChPrompt: function() {
-        masterPwd.specialCh1 = window.confirm("Do you wish to have special character/s in your password");
-        if (masterPwd.specialCh1 === true){
-            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.specialCh2) //this will add a special charater to a blank field.
-            masterPwd.includeACh1 === true;
-        }
-    },
-
-    validPassword(),
-    
-    clearPassword()
-}
-
-
-// Defining password rules (#4); validating the password
-pwdRule4: function{
-    var lowerCase4 = false;
-    if (pwdRule4.lowerCase4) {
+// function for validating the password for each charater seperately
+function validPassword () {
+    // for lower case
+    if (lowerCase) {
         for (var i = 0; i < length; i++) {
-            if (pwdRule2.lowerCase2.includes(pwdRule1.pwd1[i])) {
-                lowerCase4 = true;
+            if (lowerCaseArray.includes(pwd[i])) {
+                includedLowerCase = true;
+                break;
+            }
+        }
+    }  
+        
+    // for upper case
+    if (upperCase) {
+        for (var i = 0; i < length; i++) {
+            if (upperCaseArray.includes(pwd[i])) {
+                includedUpperCase = true;
                 break;
             }
         }
     }
 
-    var upperCase4 = false;
-    if (pwdRule4.upperCase4) {
+    // for number character
+    if (numericCh) {
         for (var i = 0; i < length; i++) {
-            if (pwdRule2.upperCase2.includes(pwdRule1.pwd1[i])) {
-                upperCase4 = true;
+            if (numericChArray.includes(pwd[i])) {
+                includedNumericCh = true;
                 break;
             }
         }
     }
-
-    var numericCh4 = false;
-    if (pwdRule4.numericCh4) {
+        
+    // for special character
+    if (specialCh) {
         for (var i = 0; i < length; i++) {
-            if (pwdRule2.numericCh2.includes(pwdRule1.pwd1[i])) {
-                numericCh4 = true;
+            if (specialChArray.includes(pwd[i])) {
+                includedSpecialCh = true;
                 break;
             }
         }
     }
     
-    var specialCh4 = false;
-    if (pwdRule4.specialCh4) {
-        for (var i = 0; i < length; i++) {
-            if (pwdRule2.specialCh2.includes(pwdRule1.pwd1[i])) {
-                specialCh4 = true;
-                break;
-            }
+    // final validity check
+    if (includedLowerCase === true && includedUpperCase === true && includedNumericCh === true && includedSpecialCh === true) {
+        validPwd = true;
+    } else {
+            validPwd = false;
+            pwd = "";
         }
-    }
 }
-
-
-// Defining password rules (#5); reseting the password
-var pwdRule5 = {
-
-}
-
-
 
 // Generate password function
 function generatePassword() {
-// Declare variables for a number that is random and any type of charater
-  var aNumber = 0;
-  var aCharacter = '';
+    // Prompt for length,lowercase, uppercase, numeic charater/s and special character/
+    lengthPrompt();
+    while (includeACh === false){
+        lowerCasePrompt();
+        upperCasePrompt();
+        numericChPrompt();
+        specialChPrompt();
+    
+        // alert in case if any of the charater selection critreia is not selected.
+        if (includeACh === false) {
+            alert("your password must have at least a lowercase, an uppercase, a number and a special character");
+        }
+    }
 
-  // Prompt for length of password, length is checked and validated or prompted again
-  Password.length3();
+    // variable for creating a random password.
+    var aNumber = 0;
+    var aCharacter = "";
 
-  if (pwdRule1.includeACh === false) {
-      pwdRule3.lowerCh3();
-      pwdRule3.upperCh3();
-      pwdRule3.numericCh3();
-      pwdRule3.specialCh3(); {
-          alert("your password must have at least a lowercase, an uppercase, a number and a special character");
-        } 
-    } 
+    // creating a password using the rnadom character
+    while (validPwd === false) {
+        for (var i = 0; i < length; i++) {
+            aNumber = Math.floor(Math.random() * anyCharacterArray.length);
+            aCharacter = anyCharacterArray[aNumber];
+            pwd = pwd.concat(aCharater);
+        }
+        validPassword();
+    };
+
+    // Return the new password to be written to the textArea
+    return pwd;
+};
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+  }
+  
+  // Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
