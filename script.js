@@ -1,35 +1,28 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Defining password rules (#1); defining the properties of the baseline password for setting rules
-var pwdRule1 = {
-  pwd1: "", //blank field
-  length1: 0, //length when 0
-  lowerCase1: false, // no lowercase charater
-  upperCase1: false, //no uppercase character
-  numericCh1: false, //no number charater
-  specialCh1: false, // no special charater
-  includeACh1: false, //does not include a charater from each of the above four
-}
-//verify the above steps - self-check #1
-console.log(pwdRule1)
+// Password rules
+var masterPwd = {
+    pwd1: "", //blank field
+    length1: 0, //length when 0
+    lowerCase1: false, // no lowercase charater
+    upperCase1: false, //no uppercase character
+    numericCh1: false, //no number charater
+    specialCh1: false, // no special charater
+    includeACh1: false, //does not include a charater from each of the above four
 
-// Defining password rules (#2); defining the arrays to be include in the new password
-var pwdRule2 = {
-  lowerCase2: ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
-  upperCase2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
-  numericCh2: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  specialCh2: ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'], //special charaters from OWASP website
-
+    //defining the arrays to be include in the new password
+    lowerCase2: ['a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+    upperCase2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    numericCh2: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    specialCh2: ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'], //special charaters from OWASP website
+    chArray2: []
 }
 //verify the above arrays - self-check #2
 console.log(pwdRule2)
 
-
 // Defining password rules (#3); prompting/confirming the rules to be included and validating the user input
-var pwdRule3 = {
-    length3: function () {
-    pwdRule1.length1 = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
+validlength: function () {
     if (pwdRule1.length1 <8 || pwdRule1.length >128){
         return false;
         }
@@ -37,6 +30,10 @@ var pwdRule3 = {
         return true;
         } 
     },
+
+
+    pwdRule1.length1 = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
+    
 
     lowerCh3: function() {
         pwdRule1.lowerCh1 = window.confirm("Do you wish to have lowercase character/s in your password");
