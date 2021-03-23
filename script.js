@@ -16,58 +16,64 @@ var masterPwd = {
     upperCase2: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     numericCh2: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
     specialCh2: ['!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '{', '|', '}', '~'], //special charaters from OWASP website
-    chArray2: []
-}
-//verify the above arrays - self-check #2
-console.log(pwdRule2)
+    chArray2: [],
 
-// Defining password rules (#3); prompting/confirming the rules to be included and validating the user input
-validlength: function () {
-    if (pwdRule1.length1 <8 || pwdRule1.length >128){
+    // PROMPTS and CONFIRM message
+    // prompting user to add a number for the desired length of their password
+    lengthPrompt: function(){
+        masterPwd.length1 = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length"
+        );
+        if (this.validlength() === false) {
+            alert("your password must have between 8 and 128 inclusive charaters");
+            masterPwd.lengthPrompt();
+        }
+    },    
+        
+    // Defining password rules (#3); prompting/confirming the rules to be included and validating the user input
+    validlength: function () {
+        if (pwdRule1.length1 <8 || pwdRule1.length >128){
         return false;
         }
-    else {
+        else {
         return true;
         } 
     },
-
-
-    pwdRule1.length1 = window.prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
     
-
-    lowerCh3: function() {
-        pwdRule1.lowerCh1 = window.confirm("Do you wish to have lowercase character/s in your password");
-        if (pwdRule1.lowerCase1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.lowerCase2) //this will add a value to a blank field.
-            pwdRule1.includeACh1 === true;
-
-        
+    lowerCasePrompt: function() {
+        pwdRule1.lowerCase1 = window.confirm("Do you wish to have lowercase character/s in your password");
+        if (masterPwd.lowerCase1 === true){
+            masterPwd.chArray2 = masterPwd.chArray2.concat(masterPwd.lowerCase2) //this will add a lowercase charater to a blank field.
+            masterPwd.includeACh1 === true;        
         }
     },
   
-    upperCh3: function () {
-        pwdRule1.upperCase1 = window.confirm("Do you wish to have uppercase character/s in your password");
-        if (pwdRule1.upperCase1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.upperCase2) //this will add a value to a blank field.
-            pwdRule1.includeACh1 === true;
+    upperCasePrompt: function () {
+        masterPwd.upperCase1 = window.confirm("Do you wish to have uppercase character/s in your password");
+        if (masterPwd.upperCase1 === true){
+            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.upperCase2) //this will add a uppercase charater to a blank field.
+            masterPwd.includeACh1 === true;
         }
     },
   
-    numberCh3: function() {
-        pwdRule1.numericCh1 = window.confirm("Do you wish to have number character/s in your password");
-        if (pwdRule1.numeric1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.numbericCh2) //this will add a value to a blank field.
-            pwdRule1.includeACh1 === true;
+    numberChPrompt: function() {
+        masterPwd.numericCh1 = window.confirm("Do you wish to have number character/s in your password");
+        if (masterPwd.numericCh1 === true){
+            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.numbericCh2) //this will add a number charater to a blank field.
+            masterPwd.includeACh1 === true;
         }
     },
 
-    specialCh3: function() {
-        pwdRule1.specialCh1 = window.confirm("Do you wish to have special character/s in your password");
-        if (pwdRule1.specialCh1 === true){
-            pwdRule1.pwd1 = pwdRule1.pwd1.concat(pwdRule2.specialCh2) //this will add a value to a blank field.
-            pwdRule1.includeACh1 === true;
+    specialChPrompt: function() {
+        masterPwd.specialCh1 = window.confirm("Do you wish to have special character/s in your password");
+        if (masterPwd.specialCh1 === true){
+            masterPwd.pwd1 = masterPwd.chArray2.concat(masterPwd.specialCh2) //this will add a special charater to a blank field.
+            masterPwd.includeACh1 === true;
         }
     },
+
+    validPassword(),
+    
+    clearPassword()
 }
 
 
