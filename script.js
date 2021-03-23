@@ -25,20 +25,10 @@ var includedSpecialCh = false;
 var validPwd = false;
 
 // PROMPTS and CONFIRM functions
-// validating the length of the password
-function validLength() {
-    if (this.length < 8 || this.length > 128){
-        return false;
-    } 
-    else {
-        return true;
-    } 
-};
-
 // prompting user to add a number for the desired length of their password
 function lengthPrompt() {
     this.length = prompt("write a number between 8 and 128 charaters (inclusive) for your password length");
-    if (validlength() === false) {
+    if (validLength() === false) {
         alert("your password must have between 8 and 128 charaters");
         this.lengthPrompt();
     }
@@ -49,7 +39,7 @@ function lowerCasePrompt() {
     this.lowerCase = confirm("Do you wish to have lowercase character/s in your password");
     if (this.lowerCase === true){
         this.anyCharacterArray = this.anyCharacterArray.concat(lowerCaseArray);
-        this.includeACh === true;
+        this.includeACh = true;
     }
 };
 
@@ -58,7 +48,7 @@ function upperCasePrompt () {
     this.upperCase = confirm("Do you wish to have uppercase character/s in your password");
     if (this.upperCase === true){
         this.anyCharacterArray = this.anyCharacterArray.concat(upperCaseArray); //this will add a uppercase character/s to a blank field.
-        this.includeACh=== true;
+        this.includeACh = true;
     }
 };
 
@@ -67,7 +57,7 @@ function numericChPrompt() {
     this.numericCh = confirm("Do you wish to have number character/s in your password");
     if (this.numericCh === true){
         this.anyCharacterArray = this.anyCharacterArray.concat(this.numericChArray); //this will add a number character/s to a blank field.
-        this.includeACh === true;
+        this.includeACh = true;
     }
 };
 
@@ -76,7 +66,7 @@ function specialChPrompt() {
     this.specialCh = confirm("Do you wish to have special character/s in your password");
     if (this.specialCh === true) {
         this.anyCharacterArray = this.anyCharacterArray.concat(specialChArray); //this will add a special character/s to a blank field.
-        this.includeACh === true;
+        this.includeACh = true;
     }
 };
     
@@ -135,11 +125,17 @@ function validPassword () {
 function generatePassword() {
     // Prompt for length,lowercase, uppercase, numeic charater/s and special character/
     lengthPrompt();
+    console.log(includeACh) //verifying the step
+
     while (includeACh === false){
-        lowerCasePrompt();
+        lowerCasePrompt(); 
+        console.log(includeACh) //verifying the step
         upperCasePrompt();
-        numericChPrompt();
+        console.log(includeACh) //verifying the step
+        numericChPrompt(); 
+        console.log(includeACh) //verifying the step
         specialChPrompt();
+        console.log(includeACh) //verifying the step
     
         // alert in case if any of the charater selection critreia is not selected.
         if (includeACh === false) {
@@ -156,13 +152,22 @@ function generatePassword() {
         for (var i = 0; i < length; i++) {
             aNumber = Math.floor(Math.random() * anyCharacterArray.length);
             aCharacter = anyCharacterArray[aNumber];
-            pwd = pwd.concat(aCharater);
+            pwd = pwd.concat(aCharacter);
         }
         validPassword();
-    };
-
+    }
     // Return the new password to be written to the textArea
     return pwd;
+};
+
+// validating the length of the password
+function validLength() {
+    if (this.length < 8 || this.length > 128){
+        return false;
+    } 
+    else {
+        return true;
+    } 
 };
 
 // Write password to the #password input
